@@ -4,7 +4,7 @@ var session = require('express-session');
 var passport = require('passport');
 var Auth0Strategy = require('passport-auth0');
 var massive = require('massive');
-var controller = require ('./controller');
+var controller = require ('controller');
 
 var SESSION_SECRET = process.env.SESSION_SECRET, 
     DOMAIN = process.env.DOMAIN, 
@@ -15,6 +15,7 @@ var SESSION_SECRET = process.env.SESSION_SECRET,
 var SERVER_PORT = 3006;
 
 var app = express();
+app.use( express.static( `${__dirname}/../build` ) );
 app.use(session({
     secret: SESSION_SECRET,
     resave: false,
@@ -89,11 +90,13 @@ passport.use(new Auth0Strategy({
   
   app.get('/auth/logout', (req, res) => {
     req.logOut();
-    return res.redirect('process.env.REACT_APP_LOGIN/Header/');
+    return res.redirect('http://localhost:3000/Header/');
   })
   
 //student endpoints
 app.post('/api/student', controller.addstudent)
+
+
 
 
   let PORT = 3006;
