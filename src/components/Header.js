@@ -6,13 +6,13 @@ const Header = ({ user, clearState }) => {
   const logInOut = () => {
     if (!user) {
       return (
-        <a id="log-in" href="http://localhost:3006/auth">
+        <a id="log-in" href={process.env.REACT_APP_BASEURL+'/auth'}>
         Log In
         </a>
       )
     } else {
       return (
-        <a id="log-out" href='/' onClick={(e) => {
+        <a id="log-out" href={`${process.env.REACT_APP_BASEURL}/auth/logout`} onClick={(e) => {
           e.preventDefault();
           clearState();
         }}>

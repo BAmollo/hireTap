@@ -89,7 +89,7 @@ passport.use(new Auth0Strategy({
   
   app.get('/auth/logout', (req, res) => {
     req.logOut();
-    return res.redirect('http://localhost:3000/Header/');
+    return res.redirect('process.env.REACT_APP_LOGIN/Header/');
   })
   
 //student endpoints

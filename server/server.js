@@ -12,7 +12,7 @@ require('dotenv');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static('app'));
+app.use( express.static( `${__dirname}/../build` ) );
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -283,6 +283,10 @@ app.delete(`/api/v1/students/:gh_id`, (request, response) => {
     .catch(error => {
       response.status(500).json({ error });
     });
+});
+
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, '../build/index.html'));
 });
 
 app.listen(app.get('port'), () => {
